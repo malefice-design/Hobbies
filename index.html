@@ -100,14 +100,23 @@
   }
 
   header.top{
-    margin:0 -16px 20px;
-    padding:16px;
+    position:relative;
+    left:50%;
+    width:100vw;
+    transform:translateX(-50%);
+    margin:0 0 20px;
+    padding-block:16px;
     box-shadow:0 2px 2px 0 rgba(83, 92, 89, 0.10);
     background:var(--surface);
   }
   header.top h1{font-size:1.6rem;}
   header.top p{margin:6px 0 0; color:var(--ink-soft); font-size:.92rem; max-width:60ch;}
-  .top-row{display:flex; justify-content:space-between; align-items:center; gap:12px;}
+  .top-row{
+    display:flex; justify-content:space-between; align-items:center; gap:12px;
+    max-width:688px;
+    margin:0 auto;
+    padding-inline:16px;
+  }
   .top-row .icon-btn{width:38px; height:38px; flex-shrink:0;}
   .top-row .icon-btn .material-symbols-outlined{font-size:22px;}
   .logo{display:flex; align-items:center;}
