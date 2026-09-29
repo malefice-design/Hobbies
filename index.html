@@ -130,12 +130,21 @@
   .logo .app-icon{height:24px; width:24px; display:block; flex-shrink:0;}
 
   .settings-topbar{
-    display:grid; grid-template-columns:38px 1fr 38px;
-    align-items:center; gap:8px;
-    margin:0 -16px 20px;
-    padding:16px;
+    position:relative;
+    left:50%;
+    width:100vw;
+    transform:translateX(-50%);
+    margin:0 0 20px;
+    padding-block:16px;
     box-shadow:0 2px 2px 0 rgba(83, 92, 89, 0.10);
     background:var(--surface);
+  }
+  .settings-topbar-row{
+    display:grid; grid-template-columns:38px 1fr 38px;
+    align-items:center; gap:8px;
+    max-width:688px;
+    margin:0 auto;
+    padding-inline:16px;
   }
   .settings-topbar h2{font-size:1.3rem; margin:0; text-align:center;}
 
@@ -624,9 +633,11 @@
 
 <section id="panel-settings" hidden>
   <div class="settings-topbar">
-    <button type="button" class="icon-btn" id="btn-settings-back" aria-label="Volver"><span class="material-symbols-outlined">arrow_back</span></button>
-    <h2>Configuraciones</h2>
-    <span></span>
+    <div class="settings-topbar-row">
+      <button type="button" class="icon-btn" id="btn-settings-back" aria-label="Volver"><span class="material-symbols-outlined">arrow_back</span></button>
+      <h2>Configuraciones</h2>
+      <span></span>
+    </div>
   </div>
   <p style="color:var(--ink-soft); font-size:.88rem; margin:0 0 20px;">Como esta app guarda todo solo en este navegador, aquí puedes respaldar tu catálogo o pasarlo a otro dispositivo.</p>
 
