@@ -438,6 +438,44 @@
     z-index:6;
   }
 
+  #welcome-dialog{width:min(420px, 92vw);}
+  .welcome-icon{width:56px; height:56px; border-radius:14px; display:block; margin:0 auto 16px;}
+  .welcome-title{font-size:1.4rem; text-align:center; color:var(--accent-ink); margin-bottom:8px;}
+  .welcome-sub{text-align:center; color:var(--ink-soft); font-size:.92rem; line-height:1.5; margin-bottom:22px;}
+  .feature-list{display:flex; flex-direction:column; gap:16px; margin-bottom:24px;}
+  .feature-item{display:flex; align-items:flex-start; gap:12px;}
+  .feature-icon{
+    width:38px; height:38px; flex-shrink:0;
+    border-radius:10px;
+    background:var(--surface-2);
+    color:var(--accent-ink);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .feature-icon .material-symbols-outlined{font-size:20px;}
+  .feature-text h3{font-family:'Nunito', sans-serif; font-weight:700; font-size:.94rem; color:#535C59; margin-bottom:2px;}
+  .feature-text p{margin:0; color:var(--ink-soft); font-size:.85rem; line-height:1.45;}
+  .welcome-check{display:flex; align-items:center; gap:8px; justify-content:center; margin-top:16px;}
+  .welcome-check label{font-size:.82rem; color:var(--ink-soft); cursor:pointer;}
+  .welcome-check input[type=checkbox]{
+    appearance:none; -webkit-appearance:none;
+    width:16px; height:16px;
+    border:1.5px solid var(--line);
+    border-radius:5px;
+    background:var(--surface);
+    cursor:pointer;
+    position:relative;
+    flex-shrink:0;
+  }
+  .welcome-check input[type=checkbox]:checked{background:var(--accent); border-color:var(--accent);}
+  .welcome-check input[type=checkbox]:checked::after{
+    content:"";
+    position:absolute; left:4px; top:1px;
+    width:4px; height:8px;
+    border:solid #FFFFFF;
+    border-width:0 2px 2px 0;
+    transform:rotate(45deg);
+  }
+
   .toast{
     position:fixed;
     left:50%; bottom:calc(24px + env(safe-area-inset-bottom, 0px));
@@ -725,6 +763,64 @@
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
+<dialog id="welcome-dialog">
+  <button type="button" class="dialog-close" aria-label="Cerrar">×</button>
+  <div class="dialog-inner">
+    <svg class="welcome-icon" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="80" height="80" rx="18" fill="url(#paint0_linear_welcome_icon)"/>
+      <path d="M55.0786 68.4513C52.3467 68.4513 49.8032 68.0534 47.4482 67.2574C45.0931 66.4615 43.2326 65.3846 41.8666 64.0269V20.1333C41.8666 19.1033 41.3956 18.5883 40.4536 18.5883H37.3448L36.709 16.7623C38.0749 15.545 39.6293 14.5384 41.372 13.7424C43.1619 12.9465 44.7163 12.5485 46.0351 12.5485C46.6945 12.5485 47.2362 12.7592 47.6601 13.1806C48.084 13.602 48.296 14.1404 48.296 14.7959V62.2711C49.3793 63.0203 50.5098 63.5821 51.6873 63.9566C52.8649 64.3312 54.2073 64.5185 55.7145 64.5185C58.8703 64.5185 61.3667 63.2075 63.2037 60.5856C65.0407 57.9637 65.9591 54.4522 65.9591 50.0512C65.9591 47.1952 65.5352 44.6903 64.6874 42.5366C63.8867 40.3361 62.7562 38.6271 61.2961 37.4098C59.8359 36.1925 58.1403 35.5839 56.2091 35.5839C54.7489 35.5839 53.7127 35.7477 53.1004 36.0755C52.5351 36.3564 52.0641 36.4968 51.6873 36.4968C51.4047 36.4968 51.1456 36.333 50.9101 36.0052C50.7217 35.6775 50.6275 35.3263 50.6275 34.9518C50.6275 34.3899 50.8395 33.9686 51.2634 33.6876C52.4409 32.9385 53.6185 32.4235 54.796 32.1426C56.0207 31.8149 57.2218 31.651 58.3993 31.651C61.3667 31.651 63.9809 32.3767 66.2418 33.8281C68.5026 35.2795 70.269 37.2928 71.5407 39.8679C72.8124 42.3961 73.4483 45.3224 73.4483 48.6466C73.4483 52.439 72.6476 55.8334 71.0461 58.8299C69.4447 61.7795 67.2544 64.1205 64.4754 65.8528C61.7435 67.5852 58.6113 68.4513 55.0786 68.4513Z" fill="#F8FCFB"/>
+      <path d="M26.1221 68.4513C23.3902 68.4513 20.8467 68.0534 18.4917 67.2574C16.1366 66.4615 14.2761 65.3846 12.9101 64.0269V20.1333C12.9101 19.1033 12.4391 18.5883 11.497 18.5883H8.38834L7.75246 16.7623C9.11841 15.545 10.6728 14.5384 12.4155 13.7424C14.2054 12.9465 15.7598 12.5485 17.0786 12.5485C17.738 12.5485 18.2797 12.7592 18.7036 13.1806C19.1275 13.602 19.3395 14.1404 19.3395 14.7959V62.2711C20.4228 63.0202 21.5533 63.5821 22.7308 63.9566C23.9084 64.3312 25.2508 64.5185 26.758 64.5185C29.9138 64.5185 32.4102 63.2075 34.2472 60.5856C36.0842 57.9637 37.0026 54.4522 37.0026 50.0512C37.0026 47.1952 36.5787 44.6903 35.7309 42.5366C34.9302 40.3361 33.7997 38.6271 32.3396 37.4098C30.8794 36.1925 29.1837 35.5839 27.2526 35.5839C25.7924 35.5839 24.7562 35.7477 24.1439 36.0755C23.5786 36.3564 23.1076 36.4968 22.7308 36.4968C22.4482 36.4968 22.1891 36.333 21.9536 36.0052C21.7652 35.6775 21.671 35.3263 21.671 34.9518C21.671 34.3899 21.883 33.9686 22.3069 33.6876C23.4844 32.9385 24.662 32.4235 25.8395 32.1426C27.0642 31.8149 28.2653 31.651 29.4428 31.651C32.4102 31.651 35.0244 32.3767 37.2852 33.8281C39.5461 35.2795 41.3124 37.2928 42.5842 39.8679C43.8559 42.3961 44.4918 45.3224 44.4918 48.6466C44.4918 52.439 43.6911 55.8334 42.0896 58.8299C40.4882 61.7795 38.2979 64.1205 35.5189 65.8528C32.787 67.5852 29.6548 68.4513 26.1221 68.4513Z" fill="#F8FCFB"/>
+      <defs>
+        <linearGradient id="paint0_linear_welcome_icon" x1="40" y1="0" x2="40" y2="80" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#9BE0CE"/>
+          <stop offset="1" stop-color="#D4E6AB"/>
+        </linearGradient>
+      </defs>
+    </svg>
+
+    <h2 class="welcome-title">¡Bienvenido a Hobbies!</h2>
+    <p class="welcome-sub">Un catálogo de tus hobbies con un generador que te sugiere qué hacer según cómo estás.</p>
+
+    <div class="feature-list">
+      <div class="feature-item">
+        <div class="feature-icon"><span class="material-symbols-outlined">emoji_objects</span></div>
+        <div class="feature-text">
+          <h3>¿Qué hago?</h3>
+          <p>Cuéntanos cómo andas, y te sugerimos alguno de tus hobbies.</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon"><span class="material-symbols-outlined">casino</span></div>
+        <div class="feature-text">
+          <h3>¡Sorpréndeme!</h3>
+          <p>¿Prefieres dejarlo al azar? Gira la rueda con todos tus hobbies.</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon"><span class="material-symbols-outlined">menu_book</span></div>
+        <div class="feature-text">
+          <h3>Mi catálogo</h3>
+          <p>Los hobbies que ves son solo de muestra — edítalos o crea los tuyos.</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon"><span class="material-symbols-outlined">lock</span></div>
+        <div class="feature-text">
+          <h3>Todo queda en tu navegador</h3>
+          <p>No hay cuentas ni nube — tus datos se guardan solo acá. Puedes respaldarlos en Configuración.</p>
+        </div>
+      </div>
+    </div>
+
+    <button type="button" class="btn-primary" id="welcome-start">Entiendo :)</button>
+
+    <div class="welcome-check">
+      <input type="checkbox" id="welcome-dont-show" checked>
+      <label for="welcome-dont-show">No volver a mostrar</label>
+    </div>
+  </div>
+</dialog>
+
 <dialog id="suggestion-dialog">
   <button type="button" class="dialog-close" aria-label="Cerrar">×</button>
   <div class="dialog-inner">
@@ -922,6 +1018,20 @@
 
   var state = loadData();
   saveData();
+
+  // ---------- welcome modal ----------
+  var WELCOME_KEY = "hobbies-welcome-seen";
+  var welcomeDialog = document.getElementById("welcome-dialog");
+  var welcomeDontShow = document.getElementById("welcome-dont-show");
+  if (!localStorage.getItem(WELCOME_KEY)){
+    welcomeDialog.showModal();
+  }
+  welcomeDialog.addEventListener("close", function(){
+    if (welcomeDontShow.checked){
+      try{ localStorage.setItem(WELCOME_KEY, "1"); }catch(e){}
+    }
+  });
+  document.getElementById("welcome-start").addEventListener("click", function(){ welcomeDialog.close(); });
 
   // ---------- tabs ----------
   var tabGen = document.getElementById("tab-gen");
