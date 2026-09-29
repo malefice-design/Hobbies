@@ -830,28 +830,16 @@
 
   function defaultHobbies(){
     return [
-      {id:uid(), name:"Leer", subtype:"Por entretención", categories:["ocio"], duration:["ratito"], effort:"bajo", space:"simple", moods:["neutro","bajona","estres"], notes:"Tomar el libro y ya."},
-      {id:uid(), name:"Leer con intención", subtype:"Análisis / notas", categories:["intelectual"], duration:["ratito"], effort:"medio", space:"simple", moods:["energia","neutro"], notes:"Uso lápiz y stickers para marcar."},
-      {id:uid(), name:"Pintar acuarela", subtype:"", categories:["creativo","manualidad"], duration:["todo"], effort:"alto", space:"completo", moods:["energia"], notes:"Setup grande, muchas herramientas, hay que esperar que seque entre capas."},
-      {id:uid(), name:"Ver una serie", subtype:"", categories:["ocio"], duration:["ratito","todo"], effort:"bajo", space:"simple", moods:["bajona","neutro","estres"], notes:"Un capítulo o maratón entero, como dé el cuerpo."},
-      {id:uid(), name:"Salir a caminar", subtype:"", categories:["activo"], duration:["ratito"], effort:"medio", space:"completo", moods:["energia","estres"], notes:""},
-      {id:uid(), name:"Tejer", subtype:"", categories:["manualidad","relajante"], duration:["todo"], effort:"medio", space:"simple", moods:["neutro","bajona"], notes:""},
-      {id:uid(), name:"Llamar a una amiga", subtype:"", categories:["social"], duration:["ratito"], effort:"bajo", space:"simple", moods:["bajona","neutro","energia"], notes:""},
-      {id:uid(), name:"Journaling", subtype:"", categories:["relajante","intelectual"], duration:["ratito"], effort:"bajo", space:"simple", moods:["estres","bajona"], notes:""}
-    ].concat(videogameSeeds());
-  }
-
-  // Sembrados agregados después del primer lanzamiento — la migración de abajo
-  // los suma a catálogos que ya existían en localStorage sin borrar nada.
-  var SEED_VERSION = 2;
-  function videogameSeeds(){
-    return [
-      {id:uid(), name:"Sims", subtype:"Videojuego — simulación", categories:["ocio","relajante"], duration:["ratito"], effort:"bajo", space:"completo", moods:["neutro","bajona","estres"], notes:"Chill. Lo juego en el Mac de escritorio."},
-      {id:uid(), name:"Baldur's Gate 3", subtype:"Videojuego — RPG", categories:["ocio","intelectual"], duration:["todo"], effort:"alto", space:"completo", moods:["energia"], notes:"Estresante/exigente — necesito estar en el escritorio con el Mac y con la cabeza despejada."},
-      {id:uid(), name:"Bluey: The Videogame", subtype:"Videojuego", categories:["ocio","relajante"], duration:["ratito"], effort:"bajo", space:"simple", moods:["neutro","bajona","estres","energia"], notes:"Muy chill, en Switch — sirve en escritorio, sillón o desacoplado del dock."},
-      {id:uid(), name:"Disney Dreamlight Valley", subtype:"Videojuego", categories:["ocio","relajante"], duration:["ratito"], effort:"medio", space:"simple", moods:["neutro","energia"], notes:"Switch, flexible de lugar (escritorio, sillón o desacoplado del dock), pero antes necesito armar en la libreta la lista de qué necesito para las misiones."},
-      {id:uid(), name:"Little Book Shop", subtype:"Videojuego — simulación", categories:["ocio","relajante"], duration:["ratito"], effort:"bajo", space:"completo", moods:["neutro","bajona","estres"], notes:"Chill, para jugar en el PC/Mac."},
-      {id:uid(), name:"Animal Crossing", subtype:"Videojuego", categories:["ocio"], duration:["ratito"], effort:"bajo", space:"simple", moods:["neutro"], notes:"Chill pero me aburro rápido — ya casi no lo juego."}
+      {id:uid(), name:"Leer un libro", subtype:"Por entretención", categories:["ocio"], duration:["ratito"], effort:"bajo", space:"simple", moods:["neutro","bajona","estres"], notes:"Tomar el libro y ya."},
+      {id:uid(), name:"Dibujar o pintar", subtype:"", categories:["creativo"], duration:["todo"], effort:"alto", space:"completo", moods:["energia"], notes:"Setup grande, muchos materiales, hay que ordenar después."},
+      {id:uid(), name:"Ver una película o serie", subtype:"", categories:["ocio"], duration:["ratito","todo"], effort:"bajo", space:"simple", moods:["bajona","neutro","estres"], notes:"Un capítulo o maratón entero, como dé el cuerpo."},
+      {id:uid(), name:"Salir a caminar o trotar", subtype:"", categories:["activo"], duration:["ratito"], effort:"medio", space:"completo", moods:["energia","estres"], notes:""},
+      {id:uid(), name:"Tejer o bordar", subtype:"", categories:["manualidad","relajante"], duration:["todo"], effort:"medio", space:"simple", moods:["neutro","bajona"], notes:""},
+      {id:uid(), name:"Juntarse con un amigo", subtype:"", categories:["social"], duration:["ratito"], effort:"bajo", space:"simple", moods:["bajona","neutro","energia"], notes:""},
+      {id:uid(), name:"Escribir en un diario", subtype:"", categories:["relajante","intelectual"], duration:["ratito"], effort:"bajo", space:"simple", moods:["estres","bajona"], notes:""},
+      {id:uid(), name:"Cocinar una receta nueva", subtype:"", categories:["creativo"], duration:["todo"], effort:"medio", space:"completo", moods:["energia","neutro"], notes:""},
+      {id:uid(), name:"Jugar un videojuego relajante", subtype:"", categories:["ocio","relajante"], duration:["ratito"], effort:"bajo", space:"completo", moods:["neutro","bajona","estres"], notes:""},
+      {id:uid(), name:"Armar un rompecabezas", subtype:"", categories:["manualidad"], duration:["todo"], effort:"bajo", space:"completo", moods:["neutro","bajona"], notes:""}
     ];
   }
 
@@ -868,18 +856,11 @@
             if (typeof h.duration === "string") h.duration = [h.duration];
             if (!Array.isArray(h.duration)) h.duration = h.duration ? [h.duration] : ["ratito"];
           });
-          if (!(parsed.seedVersion >= SEED_VERSION)){
-            var existingNames = parsed.hobbies.map(function(h){ return h.name; });
-            videogameSeeds().forEach(function(seed){
-              if (existingNames.indexOf(seed.name) === -1) parsed.hobbies.push(seed);
-            });
-            parsed.seedVersion = SEED_VERSION;
-          }
           return parsed;
         }
       }
     }catch(e){}
-    return {hobbies: defaultHobbies(), seedVersion: SEED_VERSION};
+    return {hobbies: defaultHobbies()};
   }
   function saveData(){
     try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }catch(e){}
@@ -1641,7 +1622,6 @@
           return;
         }
         state.hobbies = imported;
-        state.seedVersion = SEED_VERSION;
         saveData();
         renderCatalog();
         showToast(imported.length + " hobbies importados");
